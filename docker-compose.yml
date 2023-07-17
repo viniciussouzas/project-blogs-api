@@ -8,7 +8,7 @@ services:
     build: .
     # Usuário linux padrão do container, não é recomendado usar root
     # https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#non-root-user
-    user: node
+    user: root
     # Nome do container para facilitar execução
     container_name: blogs_api
     # Mesmo que `docker run -t`
