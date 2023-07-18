@@ -13,7 +13,7 @@ const login = async (email, password) => {
     return { status: 'REQUIRED_VALUE', data: { message: 'Invalid fields' } };
   }
 
-  const token = generateToken({ email });
+  const token = generateToken(user.dataValues);
 
   return { status: 'SUCCESSFUL', data: { token } };
 };
