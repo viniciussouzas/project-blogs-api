@@ -17,7 +17,7 @@ const validateToken = async (req, res, next) => {
   const token = extractToken(bearerToken);
 
   try {
-    await jwt.verify(token, secret);
+    jwt.verify(token, secret);
 
     next();
   } catch (err) {

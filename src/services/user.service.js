@@ -6,20 +6,17 @@ const create = async (newUserObj) => {
 
   const checkUser = await User.findOne({
     where: { email },
-    attributes: {
-      exclude: ['password'],
-    },
   });
 
-  if (checkUser.dataValues) {
+  if (checkUser) {
     return { status: 'CONFLICT', data: { message: 'User already registered' } };
   }
 
   await User.create({ displayName, email, password, image });
 
-  const token = generateToken(checkUser.dataValues);
+  const token = generateToken({ displayName, email, image });
 
-  return { status: 'CREATED', data: token };
+  return { status: 'CREATED', data: { token } };
 };
 
 const getAll = async () => {

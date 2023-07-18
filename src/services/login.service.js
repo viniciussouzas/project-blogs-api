@@ -9,13 +9,13 @@ const login = async (email, password) => {
     },
   });
 
-  if (!user.dataValues) {
+  if (!user) {
     return { status: 'REQUIRED_VALUE', data: { message: 'Invalid fields' } };
   }
 
-  const token = generateToken(user.dataValues);
+  const token = generateToken({ email });
 
-  return { status: 'SUCCESSFUL', data: token };
+  return { status: 'SUCCESSFUL', data: { token } };
 };
 
 module.exports = {
