@@ -1,5 +1,4 @@
 const { loginService } = require('../services');
-const generateToken = require('../utils/generateToken');
 const mapStatusHTTP = require('../utils/mapStatusHTTP');
 
 const error500 = 'Algo deu errado';
@@ -10,18 +9,9 @@ const login = async (req, res) => {
   
     const { status, data } = await loginService.login(email, password);
 
-    if (status === 'REQUIRED_VALUE') {
-      return res.status(mapStatusHTTP(status)).json(data);
-    }
-
-    const dataPayload = { id: data.id, email: data.email };
-
-    const token = generateToken(dataPayload);
-  
-    return res.status(mapStatusHTTP(status)).json({ token });
+    return res.status(mapStatusHTTP(status)).json(data);
   } catch (error) {
-    console.log(error.message);
-    res.status(500).json({ message: error500 });
+    return res.status(500).json({ message: error500 });
   }
 };
 

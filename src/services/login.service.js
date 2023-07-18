@@ -1,15 +1,21 @@
 const { User } = require('../models');
+const generateToken = require('../utils/generateToken');
 
 const login = async (email, password) => {
   const user = await User.findOne({
     where: { email, password },
+    attributes: {
+      exclude: ['password'],
+    },
   });
 
-  if (!user) {
+  if (!user.dataValues) {
     return { status: 'REQUIRED_VALUE', data: { message: 'Invalid fields' } };
   }
 
-  return { status: 'SUCCESSFUL', data: user.dataValues };
+  const token = generateToken(user.dataValues);
+
+  return { status: 'SUCCESSFUL', data: token };
 };
 
 module.exports = {

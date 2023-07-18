@@ -1,7 +1,7 @@
 const loginRoute = require('./login.routes');
-const newUserRoute = require('./newUser.routes');
+const userRoute = require('./user.routes');
 
 module.exports = { 
   loginRoute,
-  newUserRoute,
+  userRoute,
 };
