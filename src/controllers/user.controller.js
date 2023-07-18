@@ -25,7 +25,19 @@ const getAll = async (req, res) => {
   }
 };
 
+const getById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status, data } = await userService.getById(id);
+
+    return res.status(mapStatusHTTP(status)).json(data);
+  } catch (error) {
+    return res.status(500).json({ message: error500 });
+  }
+};
+
 module.exports = {
   create,
   getAll,
+  getById,
 };
