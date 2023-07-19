@@ -15,6 +15,17 @@ const create = async (req, res) => {
   }
 };
 
+const getAll = async (req, res) => {
+  try {
+    const { status, data } = await categoryService.getAll();
+
+    return res.status(mapStatusHTTP(status)).json(data);
+  } catch (error) {
+    return res.status(500).json({ message: error500 });
+  }
+};
+
 module.exports = {
   create,
+  getAll,
 };
