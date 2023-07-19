@@ -19,6 +19,12 @@ const create = async (newUserObj) => {
   return { status: 'CREATED', data: { token } };
 };
 
+const getByEmail = async (email) => {
+  const user = await User.findOne({ where: { email } });
+
+  return user;
+};
+
 const getAll = async () => {
   const users = await User.findAll({
     attributes: {
@@ -48,4 +54,5 @@ module.exports = {
   create,
   getAll,
   getById,
+  getByEmail,
 };
