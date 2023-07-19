@@ -4,7 +4,9 @@ const jwt = require('jsonwebtoken');
 const secret = process.env.JWT_SECRET || 'secretJWT';
 
 function extractToken(bearerToken) {
-  return bearerToken.split(' ')[1];
+  if (bearerToken.includes(' ')) return bearerToken.split(' ')[1];
+  
+  return bearerToken;
 }
 
 const validateToken = async (req, res, next) => {
